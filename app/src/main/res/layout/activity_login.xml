@@ -13,6 +13,10 @@
         <variable
             name="loginListener"
             type="com.example.tranquility_uas_ubaya_library.view.LoginUserInterface" />
+        <variable
+            name="user"
+            type="com.example.tranquility_uas_ubaya_library.model.User" />
+
 
 
     </data>
@@ -39,7 +43,7 @@
                 android:id="@+id/txtInputPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.password}"
+                android:text="@={user.password}"
                 android:hint="Enter the password" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,7 +94,7 @@
                 android:id="@+id/txtInputUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.username}"
+                android:text="@={user.username}"
                 android:hint="Enter the Username" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,7 +104,7 @@
             android:layout_height="62dp"
             android:layout_marginTop="48dp"
             android:text="Login"
-            android:onClick="@{loginListener::onUserLoginClick}"
+            android:onClick="@{(view)->loginListener.onUserLoginClick(view)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
@@ -112,6 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:text="Register"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"

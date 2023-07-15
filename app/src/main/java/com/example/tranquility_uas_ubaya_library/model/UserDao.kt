@@ -15,9 +15,14 @@ interface UserDao {
 //    suspend fun getUserById(username: String): User?
 
     @Query("SELECT * FROM user")
-    suspend fun getAllUser(): User?
+    suspend fun getAllUser():User?
 
-    @Query("SELECT * FROM user WHERE username = :username AND " + "password = :password")
+    @Query("SELECT * FROM user")
+    suspend fun getAllUser2(): List<User> /// untuk TES
+
+    @Query("SELECT * FROM user WHERE username = :username AND password = :password")
 //    fun getUserByUsernameLiveData(username: String, password: String): LiveData<User?>
-    fun getUserByUsernamePassword(username: String, password: String):User
+//    suspend fun getUserByUsernamePassword(username: String, password: String):User?
+//    suspend fun getUserByUsernamePassword(username: String, password: String):User
+    suspend fun getUserByUsernamePassword(username: String, password: String):User
 }
