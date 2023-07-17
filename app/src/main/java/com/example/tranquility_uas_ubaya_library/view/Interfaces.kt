@@ -7,3 +7,7 @@ import com.example.tranquility_uas_ubaya_library.model.User
 interface LoginUserInterface{
     fun onUserLoginClick(v: View) ///di LoginActivity
 }
+
+interface ButtonDetailClickListener{
+    fun onButtonDetailClick(v: View)
+}

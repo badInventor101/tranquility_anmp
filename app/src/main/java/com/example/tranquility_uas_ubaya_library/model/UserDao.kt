@@ -1,6 +1,5 @@
 package com.example.tranquility_uas_ubaya_library.model
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -11,14 +10,29 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: User)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertBook(book: Book)
+
 //    @Query("SELECT * FROM user WHERE username=:username")
 //    suspend fun getUserById(username: String): User?
 
     @Query("SELECT * FROM user")
-    suspend fun getAllUser():User?
+    fun getAllUser():User?
 
     @Query("SELECT * FROM user")
-    suspend fun getAllUser2(): List<User> /// untuk TES
+    fun getAllUser2(): List<User> /// untuk TES
+
+    @Query("SELECT * FROM book")
+    suspend fun getAllBook(): List<Book>
+
+    @Query("SELECT * FROM book WHERE genre = :genre")
+    suspend fun getAllBookByGenre(genre: String): List<Book>
+
+    @Query("SELECT * FROM book WHERE id = :id")
+    suspend fun getOneBook(id: Int): Book
+
+    @Query("DELETE FROM book WHERE id = :id")
+    suspend fun deleteById(id: Int)
 
     @Query("SELECT * FROM user WHERE username = :username AND password = :password")
 //    fun getUserByUsernameLiveData(username: String, password: String): LiveData<User?>

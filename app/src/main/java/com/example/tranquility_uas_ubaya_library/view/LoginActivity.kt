@@ -20,6 +20,7 @@ import com.example.tranquility_uas_ubaya_library.model.User
 import com.example.tranquility_uas_ubaya_library.model.UserDao
 import com.example.tranquility_uas_ubaya_library.util.MIGRATION_1_2
 import com.example.tranquility_uas_ubaya_library.util.MIGRATION_2_3
+import com.example.tranquility_uas_ubaya_library.util.MIGRATION_3_4
 import com.example.tranquility_uas_ubaya_library.viewmodel.LoginViewModel
 import com.example.tranquility_uas_ubaya_library.util.buildDB
 import kotlinx.coroutines.launch
@@ -58,7 +59,7 @@ class LoginActivity : AppCompatActivity(), LoginUserInterface {
             applicationContext,
             AppDatabase::class.java,
             "librarydb"
-        ).addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+        ).addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
             .build()
         lifecycleScope.launch {
             appDatabase.userDao().getAllUser()
