@@ -5,10 +5,7 @@ import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
-import com.example.tranquility_uas_ubaya_library.model.AppDatabase
-import com.example.tranquility_uas_ubaya_library.model.Book
-import com.example.tranquility_uas_ubaya_library.model.User
-import com.example.tranquility_uas_ubaya_library.model.UserDao
+import com.example.tranquility_uas_ubaya_library.model.*
 import com.example.tranquility_uas_ubaya_library.util.MIGRATION_1_2
 import com.example.tranquility_uas_ubaya_library.util.MIGRATION_2_3
 import com.example.tranquility_uas_ubaya_library.util.MIGRATION_3_4
@@ -26,6 +23,9 @@ class BookViewModel(application: Application): AndroidViewModel(application), Co
     var bookLD =  MutableLiveData<List<Book>>()
     var bookOneLD = MutableLiveData<Book?>()
     var userList = MutableLiveData<List<User>>()
+
+    var UserbookLD =  MutableLiveData<List<UserBook>>()
+
 
     private val job = Job()
 
@@ -60,6 +60,15 @@ class BookViewModel(application: Application): AndroidViewModel(application), Co
             bookOneLD.postValue(db.userDao().getOneBook(id))
 
         }
+    }
+
+    fun getAllUserBook(){
+        launch {
+            val db = buildDB(getApplication())
+            UserbookLD.postValue(db.userDao().getAllBookRent())
+
+        }
+
     }
 
 

@@ -18,7 +18,7 @@ val DB_NAME = "librarydb"
 
 fun buildDB(context:Context):AppDatabase{
     val db = Room.databaseBuilder(context, AppDatabase::class.java, "librarydb")
-        .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+        .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
 
         .build()
     return db
@@ -53,6 +53,23 @@ val MIGRATION_3_4 = object: Migration(3,4) {
         database.execSQL("INSERT INTO book(name,author,ratings,genre,language,release,photoUrl,desc,stock) VALUES('This Book Loves You', 'Felix Arvid', 3.8, 'Humor', 'Swedish', '2015', 'https://m.media-amazon.com/images/I/71vmpcJWq7L._AC_UF1000,1000_QL80_.jpg','Den här boken älskar dig (på engelska: This Book Loves You) är en bok från 2015 av svenska youtubern Felix PewDiePie Kjellberg. Boken är en parodi på självhjälpsböcker med inspirerande citat',100)")
 
     }
+
+
+
+
+}
+
+
+val MIGRATION_4_5 = object: Migration(4,5) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+//        database.execSQL("ALTER TABLE todoo ADD COLUMN priority INTEGER DEFAULT 3 NOT NULL")
+        // Create the new table
+//        database.execSQL("CREATE TABLE user_book(id INTEGER, username TEXT, bookname TEXT, date TEXT)")
+        database.execSQL("INSERT INTO user_book(username,bookname,date) VALUES('tes123', 'mama', '04/05/2023')")
+
+    }
+
+
 
 
 }

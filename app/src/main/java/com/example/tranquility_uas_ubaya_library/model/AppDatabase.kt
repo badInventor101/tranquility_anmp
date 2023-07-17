@@ -7,8 +7,9 @@ import androidx.room.RoomDatabase
 import com.example.tranquility_uas_ubaya_library.util.MIGRATION_1_2
 import com.example.tranquility_uas_ubaya_library.util.MIGRATION_2_3
 import com.example.tranquility_uas_ubaya_library.util.MIGRATION_3_4
+import com.example.tranquility_uas_ubaya_library.util.MIGRATION_4_5
 
-@Database(entities = [User::class, Book::class], version = 3)
+@Database(entities = [User::class, Book::class, UserBook::class], version = 4)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     private
@@ -26,7 +27,7 @@ abstract class AppDatabase : RoomDatabase() {
                 "librarydb"
 
             )
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4) // bisa di koma (tambah)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5) // bisa di koma (tambah)
 
                 .build()
 

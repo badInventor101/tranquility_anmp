@@ -23,6 +23,7 @@ class LoginViewModel(application: Application): AndroidViewModel(application), C
 
 
     var userLD = MutableLiveData<User?>()
+//    var usrArr = ArrayList<User>(1)
     var userList = MutableLiveData<List<User>>()
 
     private val job = Job()
@@ -37,6 +38,18 @@ class LoginViewModel(application: Application): AndroidViewModel(application), C
         launch {
             val db = buildDB(getApplication())
             userLD.postValue(db.userDao().getUserByUsernamePassword(username, password)) // ke DAO
+//              usrArr = db.userDao().getUserByUsernamePassword(username, password)
+
+
+        }
+
+
+    }
+
+    fun register(name: String ,username: String, password: String) {
+        launch {
+            val db = buildDB(getApplication())
+            db.userDao().insertUser(name, username, password)
 
 
 
@@ -44,6 +57,8 @@ class LoginViewModel(application: Application): AndroidViewModel(application), C
 
 
     }
+
+
 
     fun getAll(){  /// untuk TES
         launch {

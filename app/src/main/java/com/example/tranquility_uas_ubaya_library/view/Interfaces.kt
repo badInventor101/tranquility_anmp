@@ -8,6 +8,11 @@ interface LoginUserInterface{
     fun onUserLoginClick(v: View) ///di LoginActivity
 }
 
+interface RegisUserInterface{
+    fun onUserRegisClick(v: View) ///di LoginActivity
+}
+
+
 interface ButtonDetailClickListener{
     fun onButtonDetailClick(v: View)
 }

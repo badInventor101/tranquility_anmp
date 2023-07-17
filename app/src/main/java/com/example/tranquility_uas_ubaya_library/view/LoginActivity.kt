@@ -1,6 +1,7 @@
 package com.example.tranquility_uas_ubaya_library.view
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,17 +19,16 @@ import com.example.tranquility_uas_ubaya_library.databinding.ActivityLoginBindin
 import com.example.tranquility_uas_ubaya_library.model.AppDatabase
 import com.example.tranquility_uas_ubaya_library.model.User
 import com.example.tranquility_uas_ubaya_library.model.UserDao
-import com.example.tranquility_uas_ubaya_library.util.MIGRATION_1_2
-import com.example.tranquility_uas_ubaya_library.util.MIGRATION_2_3
-import com.example.tranquility_uas_ubaya_library.util.MIGRATION_3_4
+import com.example.tranquility_uas_ubaya_library.util.*
 import com.example.tranquility_uas_ubaya_library.viewmodel.LoginViewModel
-import com.example.tranquility_uas_ubaya_library.util.buildDB
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity(), LoginUserInterface {
     private lateinit var binding: ActivityLoginBinding // layoutnya
     private lateinit var viewModel: LoginViewModel
     private lateinit var userDao: UserDao
+
+    var log_count = 0
 
 
 
@@ -40,6 +40,12 @@ class LoginActivity : AppCompatActivity(), LoginUserInterface {
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 //        setContentView(R.layout.activity_login)
         setContentView(view)
+
+        // untuk button regis
+        binding.btnReg.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
 
 
 
@@ -55,15 +61,15 @@ class LoginActivity : AppCompatActivity(), LoginUserInterface {
 //        userDao = appDat.userDao()
 
         /// database
-        val appDatabase = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "librarydb"
-        ).addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
-            .build()
-        lifecycleScope.launch {
-            appDatabase.userDao().getAllUser()
-        }
+//        val appDatabase = Room.databaseBuilder(
+//            applicationContext,
+//            AppDatabase::class.java,
+//            "librarydb"
+//        )
+//            .build()
+//        lifecycleScope.launch {
+//            appDatabase.userDao().getAllUser()
+//        }
         ///////
 //        userDao = appDatabase.userDao()
 //
@@ -82,7 +88,7 @@ class LoginActivity : AppCompatActivity(), LoginUserInterface {
         viewModel.userLD.observe(this, Observer {
 //            Log.d("AAAAA", it.toString())
 
-            if (it != null){
+            if (it?.username != null){
                 Toast.makeText(this, viewModel.userLD.value.toString(), Toast.LENGTH_LONG).show()
                 Toast.makeText(this, "suceess", Toast.LENGTH_LONG).show()
                 Log.d("AAAAA", "my Message")
@@ -99,7 +105,30 @@ class LoginActivity : AppCompatActivity(), LoginUserInterface {
 
     override fun onUserLoginClick(v: View) {   // dari Interfaces.kt
         viewModel.login(binding.txtInputUsername.text.toString(), binding.txtInputPass.text.toString())     // viewmodel call ke DAO
-        Toast.makeText(this, viewModel.userLD.value.toString(), Toast.LENGTH_LONG).show()
+        if (log_count == 0){
+            Toast.makeText(this, "Tekan login lagi jika yakin login", Toast.LENGTH_LONG).show()
+            log_count++
+
+
+        }
+        else{
+            Toast.makeText(this, viewModel.userLD.value.toString(), Toast.LENGTH_LONG).show()
+            if (viewModel.userLD.value.toString() == "null"){
+                Toast.makeText(this, "Mohon cek username dan password anda", Toast.LENGTH_LONG).show()
+
+            }
+            else{
+                Toast.makeText(this, "Success Login", Toast.LENGTH_LONG).show()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+
+
+            }
+            log_count = 0
+
+        }
+//        observeUserViewModel()
+
 //        viewModel.getAll()    // viewmodel call ke DAO
 //        Toast.makeText(v.context, binding.txtInputUsername.text, Toast.LENGTH_LONG).show()
 //        Toast.makeText(this, "binding.btnLogin.text.toString()", Toast.LENGTH_LONG).show()

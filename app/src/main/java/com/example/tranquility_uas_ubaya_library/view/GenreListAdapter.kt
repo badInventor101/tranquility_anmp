@@ -42,7 +42,7 @@ class GenreListAdapter(val BookList:ArrayList<Book>):
     }
 
     override fun onButtonDetailClick(v: View) {
-        val action = BookListFragmentDirections.actionBookDetail(v.tag.toString()) // di passingkan lewat tag
+        val action = GenreListFragmentDirections.actionGenreToHome(v.tag.toString()) // di passingkan lewat tag
         Navigation.findNavController(v).navigate(action)
     }
 }
