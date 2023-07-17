@@ -35,4 +35,22 @@
             android:id="@+id/actionGenreToHome"
             app:destination="@id/itemHome" />
     </fragment>
+    <fragment
+        android:id="@+id/itemAuthor"
+        android:name="com.example.tranquility_uas_ubaya_library.view.AuthorListFragment"
+        android:label="fragment_author_list"
+        tools:layout="@layout/fragment_author_list" />
+    <fragment
+        android:id="@+id/itemLanguage"
+        android:name="com.example.tranquility_uas_ubaya_library.view.LanguageListFragment"
+        android:label="fragment_language_list"
+        tools:layout="@layout/fragment_language_list" />
+    <fragment
+        android:id="@+id/itemDate"
+        android:name="com.example.tranquility_uas_ubaya_library.view.DateListFragment"
+        android:label="DateListFragment" />
+    <fragment
+        android:id="@+id/itemRating"
+        android:name="com.example.tranquility_uas_ubaya_library.view.RatingListFragment"
+        android:label="RatingListFragment" />
 </navigation>
