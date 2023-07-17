@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/itemHome">
+
+    <fragment
+        android:id="@+id/itemHome"
+        android:name="com.example.tranquility_uas_ubaya_library.view.BookListFragment"
+        android:label="fragment_book_list"
+        tools:layout="@layout/fragment_book_list" >
+        <action
+            android:id="@+id/actionBookDetail"
+            app:destination="@id/bookDetailFragment" />
+        <argument
+            android:name="par_str"
+            app:argType="string"
+            android:defaultValue="def" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookDetailFragment"
+        android:name="com.example.tranquility_uas_ubaya_library.view.BookDetailFragment"
+        android:label="BookDetailFragment" >
+        <argument
+            android:name="book_id"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemGenre"
+        android:name="com.example.tranquility_uas_ubaya_library.view.GenreListFragment"
+        android:label="fragment_genre_list"
+        tools:layout="@layout/fragment_genre_list" >
+        <action
+            android:id="@+id/actionGenreToHome"
+            app:destination="@id/itemHome" />
+    </fragment>
+</navigation>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemHome"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/itemGenre"
+        android:icon="@drawable/baseline_view_list_24"
+        android:title="Genre" />
+    <item
+        android:id="@+id/itemAuthor"
+        android:icon="@drawable/baseline_person_24"
+        android:title="Author" />
+    <item
+        android:id="@+id/itemRent"
+        android:icon="@drawable/baseline_menu_book_24"
+        android:title="Rent" />
+</menu>
