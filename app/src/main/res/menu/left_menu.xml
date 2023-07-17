@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemLanguage"
+        android:icon="@drawable/baseline_language_24"
+        android:title="Language" />
+    <item
+        android:id="@+id/itemDate"
+        android:icon="@drawable/baseline_date_range_24"
+        android:title="Release" />
+    <item
+        android:id="@+id/itemRating"
+        android:icon="@drawable/baseline_star_24"
+        android:title="Rating" />
+</menu>
