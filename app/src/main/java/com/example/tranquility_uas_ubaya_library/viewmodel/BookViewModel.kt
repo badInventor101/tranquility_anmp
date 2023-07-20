@@ -21,6 +21,8 @@ class BookViewModel(application: Application): AndroidViewModel(application), Co
 
 
     var bookLD =  MutableLiveData<List<Book>>()
+    var bookRentLD =  MutableLiveData<List<UserBook>>()
+
     var bookOneLD = MutableLiveData<Book?>()
     var userList = MutableLiveData<List<User>>()
 
@@ -54,6 +56,27 @@ class BookViewModel(application: Application): AndroidViewModel(application), Co
 
     }
 
+    fun getAllBookByRent(username: String){
+        launch {
+            val db = buildDB(getApplication())
+            bookRentLD.postValue(db.userDao().getAllBookRent(username))
+
+        }
+
+    }
+
+    fun insertRentBook(username: String, bookname: String, date: String){
+        launch {
+            val db = buildDB(getApplication())
+            db.userDao().insertBookRent(username, bookname, date)
+            // kurangi buku
+            db.userDao().decrementBookStock(bookname, 1)
+
+        }
+
+    }
+
+
     fun getOneBook(id: Int){
         launch {
             val db = buildDB(getApplication())
@@ -62,14 +85,7 @@ class BookViewModel(application: Application): AndroidViewModel(application), Co
         }
     }
 
-    fun getAllUserBook(){
-        launch {
-            val db = buildDB(getApplication())
-            UserbookLD.postValue(db.userDao().getAllBookRent())
 
-        }
-
-    }
 
 
 

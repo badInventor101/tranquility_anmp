@@ -1,22 +1,29 @@
 package com.example.tranquility_uas_ubaya_library.view
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.Preference
+import android.preference.PreferenceDataStore
+import android.provider.Settings.Global.putString
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.content.edit
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.room.Room
+import com.example.tranquility_uas_ubaya_library.DataManager
 import com.example.tranquility_uas_ubaya_library.R
 import com.example.tranquility_uas_ubaya_library.databinding.ActivityLoginBinding
 import com.example.tranquility_uas_ubaya_library.model.AppDatabase
+import com.example.tranquility_uas_ubaya_library.model.Book
 import com.example.tranquility_uas_ubaya_library.model.User
 import com.example.tranquility_uas_ubaya_library.model.UserDao
 import com.example.tranquility_uas_ubaya_library.util.*
@@ -27,6 +34,7 @@ class LoginActivity : AppCompatActivity(), LoginUserInterface {
     private lateinit var binding: ActivityLoginBinding // layoutnya
     private lateinit var viewModel: LoginViewModel
     private lateinit var userDao: UserDao
+
 
     var log_count = 0
 
@@ -61,15 +69,27 @@ class LoginActivity : AppCompatActivity(), LoginUserInterface {
 //        userDao = appDat.userDao()
 
         /// database
-//        val appDatabase = Room.databaseBuilder(
-//            applicationContext,
-//            AppDatabase::class.java,
-//            "librarydb"
-//        )
-//            .build()
-//        lifecycleScope.launch {
-//            appDatabase.userDao().getAllUser()
-//        }
+        val appDatabase = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "librarydb"
+        )
+            .build()
+        lifecycleScope.launch {
+            appDatabase.userDao().insertBook(
+                Book(
+                    name = "jebneb",
+                    author = "jwdjbe",
+                    ratings = 2.1,
+                    genre = "Sci-FI",
+                    language = "French",
+                    release = "2011",
+                    photoUrl = "url/photo",
+                    desc = "just a book",
+                    stock = 100
+                )
+            )
+        }
         ///////
 //        userDao = appDatabase.userDao()
 //
@@ -119,6 +139,22 @@ class LoginActivity : AppCompatActivity(), LoginUserInterface {
             }
             else{
                 Toast.makeText(this, "Success Login", Toast.LENGTH_LONG).show()
+
+                // SHARED KEY
+                var SHARED_USERNAME = "usr"
+                //
+                val sharedPrefs = getSharedPreferences(packageName, Context.MODE_PRIVATE)
+                val editor = sharedPrefs.edit{
+                    putString(SHARED_USERNAME, binding.txtInputUsername.text.toString())
+
+
+                }
+                ///
+
+//                // global data
+//                // Set global data
+//                DataManager.getInstance().username = binding.txtInputUsername.text.toString()
+
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
 

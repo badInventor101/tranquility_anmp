@@ -13,4 +13,8 @@
         android:id="@+id/itemRating"
         android:icon="@drawable/baseline_star_24"
         android:title="Rating" />
+    <item
+        android:id="@+id/itemLogout"
+        android:icon="@drawable/baseline_login_24"
+        android:title="Logout" />
 </menu>

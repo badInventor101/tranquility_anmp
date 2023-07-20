@@ -46,6 +46,8 @@ class LoginViewModel(application: Application): AndroidViewModel(application), C
 
     }
 
+
+
     fun register(name: String ,username: String, password: String) {
         launch {
             val db = buildDB(getApplication())

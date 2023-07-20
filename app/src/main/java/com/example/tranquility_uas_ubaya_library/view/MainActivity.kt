@@ -1,6 +1,9 @@
 package com.example.tranquility_uas_ubaya_library.view
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
@@ -9,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import androidx.room.Room
+import com.example.tranquility_uas_ubaya_library.DataManager
 import com.example.tranquility_uas_ubaya_library.R
 import com.example.tranquility_uas_ubaya_library.model.AppDatabase
 import com.example.tranquility_uas_ubaya_library.model.Book
@@ -32,6 +36,41 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // get user session
+        // SHARED KEY
+        var SHARED_USERNAME = "usr"
+        //
+
+        val sharedPrefs = getSharedPreferences(packageName, Context.MODE_PRIVATE)
+        // retrieve user data
+        var username = sharedPrefs.getString(SHARED_USERNAME, "") // default cond ""
+//        // param di ambil dari shared preferences
+//        // Retrieve data from SharedPreferences
+//        var username = sharedPref?.getString("username", "")
+
+        // ret global data
+
+//        // Retrieve global data
+//        val username = DataManager.getInstance().username
+
+        if (username == ""){
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+        else{
+
+//            Toast.makeText(this, username, Toast.LENGTH_LONG).show()
+            // global data
+//                // Set global data
+            DataManager.getInstance().username = username!!
+
+
+
+        }
+
+
 
         // date stuff
 
@@ -67,6 +106,10 @@ class MainActivity : AppCompatActivity() {
         // for left drawer
         val navView = findViewById<NavigationView>(R.id.navView)
         NavigationUI.setupWithNavController(navView, navController)
+
+//        navView.setOnClickListener()
+
+
 
         // for bottom nav
         var bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)

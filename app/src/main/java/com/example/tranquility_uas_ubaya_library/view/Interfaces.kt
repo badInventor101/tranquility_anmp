@@ -16,3 +16,7 @@ interface RegisUserInterface{
 interface ButtonDetailClickListener{
     fun onButtonDetailClick(v: View)
 }
+
+interface RentClickListener{
+    fun onButtonRentClick(v: View)
+}

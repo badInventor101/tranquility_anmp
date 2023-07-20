@@ -28,6 +28,8 @@ class BookListAdapter(val BookList:ArrayList<Book>):
         holder.view.book = BookList[position]  /// di bind ke layout nya (databinding)
         // instatiate the listener
         holder.view.listener = this // dari layout
+
+
     }
 
     override fun getItemCount(): Int {
