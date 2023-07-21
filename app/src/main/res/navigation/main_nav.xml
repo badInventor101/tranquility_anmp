@@ -57,4 +57,8 @@
         android:id="@+id/itemRent"
         android:name="com.example.tranquility_uas_ubaya_library.view.RentFragment"
         android:label="RentFragment" />
+    <fragment
+        android:id="@+id/itemProfile"
+        android:name="com.example.tranquility_uas_ubaya_library.view.ProfileFragment"
+        android:label="fragment_profile" />
 </navigation>

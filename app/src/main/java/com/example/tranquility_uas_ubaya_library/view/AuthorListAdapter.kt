@@ -16,7 +16,6 @@ class AuthorListAdapter(val AuthorList:ArrayList<Book>):
 
     class AuthorViewHolder(var view: AuthorListItemBinding) : RecyclerView.ViewHolder(view.root) // "BookListItemBinding" dari layout "book_list_item"
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AuthorViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 //        val view = inflater.inflate(R.layout.student_list_item, parent, false)

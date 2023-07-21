@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 import com.example.tranquility_uas_ubaya_library.model.AppDatabase
+import com.example.tranquility_uas_ubaya_library.model.Book
 import com.example.tranquility_uas_ubaya_library.model.User
 import com.example.tranquility_uas_ubaya_library.model.UserDao
 import com.example.tranquility_uas_ubaya_library.util.MIGRATION_1_2
@@ -25,6 +26,7 @@ class LoginViewModel(application: Application): AndroidViewModel(application), C
     var userLD = MutableLiveData<User?>()
 //    var usrArr = ArrayList<User>(1)
     var userList = MutableLiveData<List<User>>()
+    var userOneLD = MutableLiveData<User?>()
 
     private val job = Job()
 
@@ -71,8 +73,12 @@ class LoginViewModel(application: Application): AndroidViewModel(application), C
 
     }
 
-
-
+    fun getOneUser(username: String){ // Untuk ambil data user yang sedang Login
+        launch {
+            val db = buildDB(getApplication())
+            userOneLD.postValue(db.userDao().getOneUser(username))
+        }
+    }
 
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.IO

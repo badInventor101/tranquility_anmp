@@ -22,7 +22,6 @@ class AuthorListFragment : Fragment() {
     private val authorListAdapter = AuthorListAdapter(arrayListOf()) // ada adapter karena menggunakan recyclerView
     // dan datanya adalah arraylist ( banyak )
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,16 +34,6 @@ class AuthorListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 //        val par_id = BookListFragmentArgs.fromBundle(requireArguments()).parStr // mengambil parameter ID
         viewModel = ViewModelProvider(this).get(BookViewModel::class.java)
-        // cek apakah ada par str dari genre
-
-//        if (par_id != "def"){
-//            viewModel.getAllBookByGenre(par_id)
-//
-//        }
-//        else{
-//            viewModel.getAllBook()
-//        }
-
 
         viewModel.getAllBook() // nanti di observe
 
@@ -53,8 +42,6 @@ class AuthorListFragment : Fragment() {
         recView.adapter = authorListAdapter
 
         observeViewModel()
-
-
     }
 
     fun observeViewModel() {   /// di lihat dan di amati
@@ -62,7 +49,6 @@ class AuthorListFragment : Fragment() {
             authorListAdapter.updateBookList(it as ArrayList<Book>) // lari ke bookListAdapter, di update bookListnya
         })
     }
-
 }
 
 

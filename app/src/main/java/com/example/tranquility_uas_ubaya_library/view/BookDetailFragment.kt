@@ -55,20 +55,6 @@ class BookDetailFragment : Fragment(), RentClickListener {
         var username = DataManager.getInstance().username // untuk mendapatkan username
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // dan akhirnya di observe datanya setelah di fetch dari DetailViewModel
         observeViewModel()
 

@@ -37,7 +37,8 @@ interface UserDao {
     @Query("SELECT * FROM book WHERE id = :id")
     suspend fun getOneBook(id: Int): Book
 
-
+    @Query("SELECT * FROM user WHERE username = :username")
+    suspend fun getOneUser(username: String): User
 
     @Query("DELETE FROM book WHERE id = :id")
     suspend fun deleteById(id: Int)
